@@ -1,5 +1,6 @@
 package com.dev.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,6 +20,7 @@ public class Answer {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
+	@Column(columnDefinition = "TEXT")
 	private String answer;
 	private boolean correct;
 	@ManyToOne

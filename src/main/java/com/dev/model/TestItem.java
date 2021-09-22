@@ -1,12 +1,11 @@
 package com.dev.model;
 
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,14 +15,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class User {
+public class TestItem {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
-	private String name;
-	private String nickName;
-	private String userPassword;
-	private String email;
-	@OneToMany(mappedBy = "user", orphanRemoval = true)
-	private List<Test> listOfTestTaken;
+	@ManyToOne
+	@JoinColumn(name="testId")
+	private Test test;
+	@ManyToOne
+	@JoinColumn(name="questionId")
+	private Question question;
+	private boolean solvedCorrectly;
 }
