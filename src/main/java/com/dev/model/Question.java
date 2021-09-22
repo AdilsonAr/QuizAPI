@@ -25,6 +25,7 @@ public class Question {
 	private int id;
 	@Column(columnDefinition = "TEXT")
 	private String question;
+	private String difficultyLevel;
 	@OneToMany(mappedBy = "question", orphanRemoval = true)
 	private List<Answer> answers;
 	@ManyToOne
