@@ -62,4 +62,12 @@ public class User implements UserDetails{
 	public boolean isEnabled() {
 		return true;
 	}
+	public User(String name, String nickName, String userPassword, String email) {
+		super();
+		this.name = name;
+		this.nickName = nickName;
+		this.userPassword = userPassword;
+		this.email = email;
+	}
+	
 }

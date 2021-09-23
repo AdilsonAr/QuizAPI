@@ -1,4 +1,4 @@
-package com.dev.authentication;
+package com.dev.security;
 
 import java.util.Arrays;
 
@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -22,14 +23,20 @@ import com.dev.service.UserService;
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private JwtConfig jwtConfig;
+	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http
 			// by default uses a Bean by the name of corsConfigurationSource
 			.csrf().disable()
 			.cors()
-			.and().authorizeRequests()
-			.anyRequest().authenticated().and().httpBasic();
+			.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+			.and().addFilter(new JwtAuthenticationFilter(authenticationManager(), jwtConfig))
+			.addFilterAfter(new JwtTokenVerifier(jwtConfig), JwtAuthenticationFilter.class)
+			.authorizeRequests().antMatchers("/signUp").permitAll()
+			.anyRequest().authenticated();
 	}
 	
 	@Override
