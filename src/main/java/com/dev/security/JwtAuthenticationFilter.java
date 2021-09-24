@@ -34,15 +34,18 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	@Override 
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
+		AuthenticationRequest authenticationRequest=null;
 		try {
-			AuthenticationRequest authenticationRequest = new ObjectMapper()
+			authenticationRequest = new ObjectMapper()
 					.readValue(request.getInputStream(), AuthenticationRequest.class);
 			Authentication authentication=new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
 					authenticationRequest.getPassword());
 			return authenticationManager.authenticate(authentication);
 		} catch (IOException e) {
-			throw new RuntimeException(e);
+			e.printStackTrace();
+			throw new IllegalArgumentException("information provided does not match the expected imput");
 		}
+		
 	}
 
 	@Override
@@ -59,7 +62,5 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(responseToClient);
 		response.getWriter().flush();
-		
-		//response.addHeader("Authorization", jwtConfig.getTokenPrefix() + token);
 	}
 }

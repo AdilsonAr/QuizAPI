@@ -13,7 +13,11 @@ public class CategoryService {
 	@Autowired
 	private CategoryRepository categoryRepository;
 	public List<Category> readAll(){
-		return categoryRepository.findAll();
-				
+		return categoryRepository.findAll();		
+	}
+	
+	public Category readId(int id) {
+		return categoryRepository.findById(id).orElseThrow(
+				()-> new IllegalArgumentException("The category referenced does not exist"));
 	}
 }

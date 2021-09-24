@@ -1,9 +1,10 @@
 package com.dev.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,13 +20,8 @@ public class SingUpController {
 	private UserService userService;
 	
 	@PostMapping
-	public ResponseEntity<?> create(@RequestBody UserRequestDto u){
+	public ResponseEntity<?> create(@Valid @RequestBody UserRequestDto u){
 		userService.create(UserRequestDto.toModel(u));
 		return new ResponseEntity<>(HttpStatus.CREATED);
-	}
-	
-	@GetMapping
-	public ResponseEntity<?> readAll(){
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 }
