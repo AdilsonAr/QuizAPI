@@ -11,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.dto.LabelDto;
+import com.dev.dto.ResponseDto;
 import com.dev.service.CategoryService;
 
 @RestController
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public class CategoryController {
 	@Autowired
 	CategoryService categoryService;
@@ -24,6 +25,6 @@ public class CategoryController {
 			return new LabelDto(x.getId(), x.getCategory());
 		}).collect(Collectors.toList());
 		
-		return new ResponseEntity<>(labels, HttpStatus.OK);
+		return new ResponseEntity<>(new ResponseDto<List<LabelDto>>(labels), HttpStatus.OK);
 	}
 }
