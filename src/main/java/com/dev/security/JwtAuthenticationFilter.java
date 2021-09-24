@@ -53,6 +53,13 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
 		.signWith(jwtConfig.getKey())
 		.compact();
-		response.addHeader("Authorization", jwtConfig.getTokenPrefix() + token);
+		
+		String responseToClient = "{\"Authorization\":"+"\""+jwtConfig.getTokenPrefix() + token +"\""+ "}";
+		response.setContentType("application/json");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write(responseToClient);
+		response.getWriter().flush();
+		
+		//response.addHeader("Authorization", jwtConfig.getTokenPrefix() + token);
 	}
 }
