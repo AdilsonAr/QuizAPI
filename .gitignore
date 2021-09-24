@@ -40,3 +40,9 @@ target
 secrets.yml
 .gradletasknamecache
 .sts4-cache
+/target/
+*/target/**
+**/META-INF/
+!.mvn/wrapper/maven-wrapper.jar
+target
+*/target/**
