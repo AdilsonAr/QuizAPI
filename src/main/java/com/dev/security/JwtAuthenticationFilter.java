@@ -53,7 +53,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
 				.signWith(jwtConfig.getKey()).compact();
 
-		String responseToClient = "{\"data\":[{\"token\":" + "\"" + token + "\"" + "}]}";
+		String responseToClient = "{\"data\":{\"token\":" + "\"" + token + "\"" + "}}";
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(responseToClient);
