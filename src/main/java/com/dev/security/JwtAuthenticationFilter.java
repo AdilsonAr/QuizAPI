@@ -19,11 +19,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
 
-public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter{
+public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 	private final AuthenticationManager authenticationManager;
 	private final JwtConfig jwtConfig;
-	
-	
 
 	public JwtAuthenticationFilter(AuthenticationManager authenticationManager, JwtConfig jwtConfig) {
 		super();
@@ -31,33 +29,31 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		this.jwtConfig = jwtConfig;
 	}
 
-	@Override 
+	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException {
-		AuthenticationRequest authenticationRequest=null;
+		AuthenticationRequest authenticationRequest = null;
 		try {
-			authenticationRequest = new ObjectMapper()
-					.readValue(request.getInputStream(), AuthenticationRequest.class);
-			Authentication authentication=new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
+			authenticationRequest = new ObjectMapper().readValue(request.getInputStream(), AuthenticationRequest.class);
+			Authentication authentication = new UsernamePasswordAuthenticationToken(authenticationRequest.getUsername(),
 					authenticationRequest.getPassword());
 			return authenticationManager.authenticate(authentication);
 		} catch (IOException e) {
 			e.printStackTrace();
 			throw new IllegalArgumentException("information provided does not match the expected imput");
 		}
-		
+
 	}
 
 	@Override
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain,
 			Authentication authResult) throws IOException, ServletException {
 		String token = Jwts.builder().setSubject(authResult.getName()).claim("authorities", authResult.getAuthorities())
-		.setIssuedAt(new Date())
-		.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
-		.signWith(jwtConfig.getKey())
-		.compact();
-		
-		String responseToClient = "{\"Authorization\":"+"\""+jwtConfig.getTokenPrefix() + token +"\""+ "}";
+				.setIssuedAt(new Date())
+				.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
+				.signWith(jwtConfig.getKey()).compact();
+
+		String responseToClient = "{\"data\":[{\"token\":" + "\"" + token + "\"" + "}]}";
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(responseToClient);
