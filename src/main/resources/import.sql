@@ -930,3 +930,40 @@ INSERT INTO user(email, name, nick_name, user_password) VALUES ("Aherrh02@gmail.
 INSERT INTO user(email, name, nick_name, user_password) VALUES ("ruben.vigil24@gmail.com", "Ruben Vigil", "vigil24", "pass12385");
 INSERT INTO user(email, name, nick_name, user_password) VALUES ("cycles.250@gmail.com", "Adilson Arbuez", "cycles", "pass12385");
 INSERT INTO user(email, name, nick_name, user_password) VALUES ("amayaricardo2607@gmail.com", "Ricardo Amaya", "richardamaya26", "pass12385");
+    
+//Tests
+INSERT INTO `test` (`date`, `grade`, `items_count`, `user_id`) VALUES ('2021-09-25 02:13:00.000000', '70', '10', '3');
+INSERT INTO `test` (`date`, `grade`, `items_count`, `user_id`) VALUES ('2021-09-25 02:13:00.000000', '80', '5', '1');
+INSERT INTO `test` (`date`, `grade`, `items_count`, `user_id`) VALUES ('2021-09-25 02:13:00.000000', '100', '15', '3');
+
+//Test items
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,1,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,2,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (0,3,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,4,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,5,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (0,6,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,7,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (0,8,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,9,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,10,1);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,61,2);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,62,2);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,63,2);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (0,64,2);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,65,2);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,151,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,151,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,153,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,154,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,155,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,156,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,157,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,158,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,159,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,160,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,161,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,162,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,163,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,164,3);
+INSERT INTO `test_item` (`solved_correctly`, `question_id`, `test_id`) VALUES (1,165,3);
