@@ -28,7 +28,6 @@ public class Test {
 	private User user;
 	private LocalDateTime date;
 	private double grade;
-	private String difficultyLevel;
 	private int itemsCount;
 	@OneToMany(mappedBy = "test", orphanRemoval = true)
 	private List<TestItem> items;
