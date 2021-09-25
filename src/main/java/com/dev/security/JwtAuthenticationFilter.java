@@ -15,6 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.dev.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import io.jsonwebtoken.Jwts;
@@ -52,8 +53,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 				.setIssuedAt(new Date())
 				.setExpiration(java.sql.Date.valueOf(LocalDate.now().plusDays(jwtConfig.getTokenExpirationAfterDays())))
 				.signWith(jwtConfig.getKey()).compact();
-
-		String responseToClient = "{\"data\":{\"token\":" + "\"" + token + "\"" + "}}";
+		User user = (User) authResult.getPrincipal();
+		String responseToClient = String.format(
+				"{ \"data\": { \"token\": \"%s\", \"username\": \"%s\", \"email\": \"%s\" } }", token,
+				user.getNickName(), user.getEmail());
 		response.setContentType("application/json");
 		response.setCharacterEncoding("UTF-8");
 		response.getWriter().write(responseToClient);
