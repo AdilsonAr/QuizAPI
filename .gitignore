@@ -46,3 +46,4 @@ secrets.yml
 !.mvn/wrapper/maven-wrapper.jar
 target
 */target/**
+/src/main/resources/spreadsheets-323221-5af05b9a3114.json
