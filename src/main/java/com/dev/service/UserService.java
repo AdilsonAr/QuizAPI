@@ -25,4 +25,14 @@ public class UserService implements UserDetailsService{
 		u.setUserPassword(passwordEncoder.encode(u.getUserPassword()));
 		userRepository.save(u);
 	}
+	
+	public User readByUsername(String username) {
+		User u=userRepository.findByEmail(username);
+		if(u!=null) {
+			return u;
+		}else {
+			throw new IllegalArgumentException("The user does not exist");
+		}
+		
+	}
 }

@@ -3,6 +3,7 @@ package com.dev.model;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,6 +30,6 @@ public class Test {
 	private LocalDateTime date;
 	private double grade;
 	private int itemsCount;
-	@OneToMany(mappedBy = "test", orphanRemoval = true)
+	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
 	private List<TestItem> items;
 }
