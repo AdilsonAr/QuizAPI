@@ -1,5 +1,7 @@
 package com.dev.dto;
 
+import javax.validation.constraints.NotBlank;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +10,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class TestRequestDto {
+	@NotBlank(message="categoryId is a required field")
 	private int categoryId;
-	private int subcategoryId;
+	@NotBlank(message="difficulty is a required field")
 	private int difficulty;
 }

@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.dev.dto.ResultDto;
 import com.dev.model.Category;
 import com.dev.model.Difficulties;
 import com.dev.model.Question;
@@ -37,8 +38,50 @@ public class TestService {
 		testCreated.setUser(u);
 		testCreated.setItems(items);
 		testCreated.setItemsCount(items.size());
+		testCreated.setClosed(false);
 		
 		testRepository.save(testCreated);
 		return testCreated;
+	}
+	
+	public ResultDto getResults(int testId){
+		ResultDto result=new ResultDto();
+		Test test=testRepository.findById(testId).orElseThrow(()->new IllegalArgumentException("The requested test does not exist"));
+		boolean allSolved=true;
+		for(TestItem c: test.getItems()) {
+			if(!c.isSolved()) {
+				allSolved=false;
+				break;
+			}
+		}
+		
+		if(!allSolved) {
+			throw new IllegalArgumentException("The requested test is not finished");
+		}
+		
+		if(test.getItems().size()==0) {
+			throw new IllegalArgumentException("The requested test does not have any item");
+		}
+		
+		int grade=0;
+		for(TestItem c: test.getItems()) {
+			if(c.isSolvedCorrectly()) {
+				grade++;
+			}
+		}
+		test.setGrade(grade);
+		test.setClosed(true);
+		testRepository.save(test);
+		
+		Question first=test.getItems().get(0).getQuestion();
+		
+		result.setCategory(first.getSubCategory().getCategory().getCategory());
+		result.setSubCategory(first.getSubCategory().getSubCategory());
+		result.setGrade(grade);
+		result.setDifficultyLevel(Difficulties.getDifficultie(first.getDifficultyLevel()).getLabel());
+		result.setTestId(test.getId());
+		result.setUserId(test.getUser().getId());
+		
+		return result;
 	}
 }
