@@ -44,9 +44,22 @@ public class TestService {
 		return testCreated;
 	}
 	
+	public boolean wasDoneBy(int testId, int userId) {
+		Test test=readId(testId);
+		if(test.getUser().getId()!=userId) {
+			return false;
+		}else {
+			return true;
+		}
+	}
+	
+	public Test readId(int testId) {
+		return testRepository.findById(testId).orElseThrow(()->new IllegalArgumentException("The requested test does not exist"));
+	}
+	
 	public ResultDto getResults(int testId){
 		ResultDto result=new ResultDto();
-		Test test=testRepository.findById(testId).orElseThrow(()->new IllegalArgumentException("The requested test does not exist"));
+		Test test=readId(testId);
 		boolean allSolved=true;
 		for(TestItem c: test.getItems()) {
 			if(!c.isSolved()) {

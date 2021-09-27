@@ -7,8 +7,10 @@ import com.dev.model.Question;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class QuestionResponseDto {
 	private int questionId;
