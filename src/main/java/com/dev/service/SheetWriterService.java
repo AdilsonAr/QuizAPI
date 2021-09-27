@@ -27,7 +27,7 @@ public class SheetWriterService {
     public void SheetsWriterService() throws IOException, GeneralSecurityException {
         sheets=GoogleServicesProvider.getSheets();
         drive= GoogleServicesProvider.getDrive();
-        //flightService=new FlightService();
+        TestGradesViewService tgv =new TestGradesViewService();
     }
 
     public String createReportByUserId(int userId, String email) throws IOException {
