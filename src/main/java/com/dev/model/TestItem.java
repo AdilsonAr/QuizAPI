@@ -26,4 +26,13 @@ public class TestItem {
 	@JoinColumn(name="questionId")
 	private Question question;
 	private boolean solvedCorrectly;
+	private boolean solved;
+	public TestItem(Test test, Question question, boolean solvedCorrectly, boolean solved) {
+		super();
+		this.test = test;
+		this.question = question;
+		this.solvedCorrectly = solvedCorrectly;
+		this.solved = solved;
+	}
+	
 }

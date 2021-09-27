@@ -7,6 +7,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 import com.dev.dto.ResponseDto;
@@ -29,6 +30,13 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 	
 	@ExceptionHandler(IllegalArgumentException.class)
 	public ResponseEntity<?> illegalArgs(IllegalArgumentException ex){
+		ResponseDto<String> response=new ResponseDto<>();
+		response.addError(ex.getMessage());
+		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
+	}
+	
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
+	public ResponseEntity<?> illegalArgs(MethodArgumentTypeMismatchException ex){
 		ResponseDto<String> response=new ResponseDto<>();
 		response.addError(ex.getMessage());
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
