@@ -20,5 +20,23 @@ public enum Difficulties {
 	public int getId() {
 		return id;
 	}
+	
+	public static Difficulties getDifficultie(int id) {
+		Difficulties d=null;
+		switch(id) {
+		case 1:
+			d=Difficulties.EASY;
+			break;
+		case 2:
+			d=Difficulties.MEDIUM;
+			break;
+		case 3:
+			d=Difficulties.HARD;
+			break;
+			default:
+			throw new IllegalArgumentException("The difficulty level is not admited");
+		}
+		return d;
+	}
 
 }

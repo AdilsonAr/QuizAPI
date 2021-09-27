@@ -32,4 +32,5 @@ public class Test {
 	private int itemsCount;
 	@OneToMany(mappedBy = "test", cascade = CascadeType.ALL)
 	private List<TestItem> items;
+	private boolean closed;
 }
