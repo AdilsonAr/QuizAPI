@@ -930,7 +930,7 @@ INSERT INTO user(email, name, nick_name, user_password) VALUES ("Aherrh02@gmail.
 INSERT INTO user(email, name, nick_name, user_password) VALUES ("ruben.vigil24@gmail.com", "Ruben Vigil", "vigil24", "pass12385");
 INSERT INTO user(email, name, nick_name, user_password) VALUES ("cycles.250@gmail.com", "Adilson Arbuez", "cycles", "pass12385");
 INSERT INTO user(email, name, nick_name, user_password) VALUES ("amayaricardo2607@gmail.com", "Ricardo Amaya", "richardamaya26", "pass12385");
-    
+
 //Tests
 INSERT INTO `test` (`date`, `grade`, `items_count`, `user_id`) VALUES ('2021-09-25 02:13:00.000000', '70', '10', '3');
 INSERT INTO `test` (`date`, `grade`, `items_count`, `user_id`) VALUES ('2021-09-25 02:13:00.000000', '80', '5', '1');
