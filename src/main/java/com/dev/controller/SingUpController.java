@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dev.dto.UserRequestDto;
+import com.dev.model.User;
 import com.dev.service.UserService;
 
 @RestController
@@ -21,6 +22,9 @@ public class SingUpController {
 	
 	@PostMapping
 	public ResponseEntity<?> create(@Valid @RequestBody UserRequestDto u){
+		if(userService.exist(u.getEmail())) {
+			throw new IllegalArgumentException("This e-mail already exist");
+		}
 		userService.create(UserRequestDto.toModel(u));
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}

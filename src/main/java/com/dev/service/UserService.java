@@ -35,4 +35,14 @@ public class UserService implements UserDetailsService{
 		}
 		
 	}
+	
+	public boolean exist(String username) {
+		User u=userRepository.findByEmail(username);
+		if(u!=null) {
+			return true;
+		}else {
+			return false;
+		}
+		
+	}
 }

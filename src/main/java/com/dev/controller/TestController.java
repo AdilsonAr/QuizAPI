@@ -45,7 +45,11 @@ public class TestController {
 	}
 	
 	@GetMapping("/{quizId}/report")
-	public ResponseEntity<?> getResults(@PathVariable("quizId") int quizId){
+	public ResponseEntity<?> getResults(@PathVariable("quizId") int quizId, Authentication a){
+		User u = userService.readByUsername(a.getName());
+		if(!testService.wasDoneBy(quizId, u.getId())) {
+			return new ResponseEntity<>(new ResponseDto<String>("User not allowed for performing this action"), HttpStatus.FORBIDDEN);
+		}
 		ResultDto result=testService.getResults(quizId);
 		return new ResponseEntity<>(new ResponseDto<ResultDto>(result), HttpStatus.OK);
 	}

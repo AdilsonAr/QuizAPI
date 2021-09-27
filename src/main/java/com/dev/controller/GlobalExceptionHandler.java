@@ -35,7 +35,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler{
 		return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
 	}
 	
-	@ExceptionHandler(IllegalArgumentException.class)
+	@ExceptionHandler(MethodArgumentTypeMismatchException.class)
 	public ResponseEntity<?> illegalArgs(MethodArgumentTypeMismatchException ex){
 		ResponseDto<String> response=new ResponseDto<>();
 		response.addError(ex.getMessage());

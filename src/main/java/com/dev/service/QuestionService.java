@@ -22,6 +22,10 @@ public class QuestionService {
 	@Autowired
 	private SubCategoryService subCategoryService;
 	
+	public Question readId(int id) {
+		return questionRepository.findById(id).orElseThrow(()->new IllegalArgumentException("The requested question does not exist"));
+	}
+	
 	public List<Question> getRandom(Difficulties d, Category c){
 		List<SubCategory> subs=subCategoryService.readByCategory(c);
 		List<QuestionId> ids=new ArrayList<>();
